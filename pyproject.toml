@@ -1,0 +1,16 @@
+[project]
+name = "otcse-reproduce"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "accelerate>=1.14.0",
+    "datasets>=5.0.0",
+    "pot>=0.9.6.post1",
+    "scikit-learn>=1.9.0",
+    "torch>=2.12.1",
+    "torchcodec>=0.14.0",
+    "transformers[torch]",
+    "wandb>=0.28.0",
+]

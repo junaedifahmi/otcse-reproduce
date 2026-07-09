@@ -1,0 +1,44 @@
+# ============================================================
+# OTCSE training configuration
+# Values under `training` map 1:1 onto transformers.TrainingArguments
+# Values under `otcse` configure the custom loss terms / OT module
+# ============================================================
+
+training:
+  output_dir: ./outputs/otcse
+  num_train_epochs: 2
+  per_device_train_batch_size: 32
+  per_device_eval_batch_size: 32
+  learning_rate: 0.001
+  logging_steps: 10
+  save_strategy: "epoch"
+  eval_strategy: "epoch"
+  remove_unused_columns: false # required: our inputs (x_s, labels_s, x_t) aren't a "standard" model signature
+  report_to: ["wandb"]
+  run_name: "otcse-run" # shows up as the run name in the W&B UI
+  load_best_model_at_end: true
+  metric_for_best_model: "f1_macro"
+  greater_is_better: true
+  dataloader_drop_last: true
+
+# Requires: `pip install wandb` and `wandb login` (or set WANDB_API_KEY) once
+# before training. project/entity are exported as env vars in train.py.
+wandb:
+  project: "otcse"
+  entity: null # your W&B username/team, or leave null to use the default
+
+otcse:
+  mu: 0.7 # scaling for the joint optimal-transport (JOT) loss
+  nu: 0.7 # scaling for the SimSiam SSL loss
+
+optimal_transport:
+  alpha: 0.1 # scaling cost matrix for Cost/Feature term
+  beta: 0.001 # scaling cost matrix for Class term
+  reg: 0.5 # regularization strength (1/sigma)
+  epsilon: 0.01
+  scale: 5.0
+
+feature_extractor:
+  backend: "hubert" # "hubert" or "wav2vec2"
+  checkpoint: null # optional HF checkpoint override; null = backend default
+  pooling: "mean" # "mean" or "max"
