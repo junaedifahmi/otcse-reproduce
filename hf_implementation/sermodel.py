@@ -12,26 +12,6 @@ class SERModelOutput(ModelOutput):
     logits: Optional[torch.Tensor] = None
 
 
-# class SERModel(nn.Module):
-#     """
-#     Ganti encoder/classifier_head/predictor sesuai arsitektur asli kamu.
-#     Bisa juga encoder = model HF (mis. AutoModel.from_pretrained(...)).
-#     """
-
-#     def __init__(self, encoder: nn.Module, embed_dim: int, num_classes: int):
-#         super().__init__()
-#         self.encoder = encoder
-#         self.classifier_head = nn.Linear(embed_dim, num_classes)
-
-#     def encode(self, x):
-#         return self.encoder(x)
-
-#     def forward(self, x) -> SERModelOutput:
-#         e = self.encode(x)
-#         logits = self.classifier_head(e)
-#         return SERModelOutput(embedding=e, logits=logits)
-
-
 class SERModel(nn.Module):
     def __init__(
         self,

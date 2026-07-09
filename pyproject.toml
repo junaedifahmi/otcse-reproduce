@@ -9,6 +9,7 @@ dependencies = [
     "datasets>=5.0.0",
     "pot>=0.9.6.post1",
     "scikit-learn>=1.9.0",
+    "soundfile>=0.14.0",
     "torch>=2.12.1",
     "torchcodec>=0.14.0",
     "transformers[torch]",
